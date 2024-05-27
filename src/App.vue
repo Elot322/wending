@@ -7,66 +7,71 @@
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          width="1171"
-          height="916"
-          src='/pc/first_block_pc.png'/>
+          :width="link === 'mobile' ? 365 : 1171"
+          :height="link === 'mobile' ? 542.55 : 916"
+          :src='`/${link}/first_block_pc.png`'/>
       </div>
       <div 
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          width="1171"
-          height="916"
-          src='/pc/two_block_pc.png'/>
+          :width="link === 'mobile' ? 365 : 1171"
+          :height="link === 'mobile' ? 578.55 : 916"
+          :src='`/${link}/two_block_pc.png`'/>
       </div>
       <div
         v-motion-slide-visible-once-right>
-        <ThreeBlock/>
+        <ThreeBlock
+          :isMobile="isMobile"/>
       </div>
       <div
         v-motion-slide-visible-once-right>
-        <FourBlock/>
-      </div>
-      <div
-        v-motion-slide-visible-once-right>
-        <img
-          :style="{'z-index': '1'}"
-          width="1467"
-          height="858"
-          src='/pc/five_block_pc.png'/>
+        <FourBlock
+          :isMobile="isMobile"/>
       </div>
       <div
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          width="1318"
-          height="786"
-          src='/pc/six_block_pc.png'/>
-      </div>
-      <div
-        v-motion-slide-visible-once-right>
-        <SevenBlock/>
+          :width="link === 'mobile' ? 365 : 1467"
+          :height="link === 'mobile' ? 616 : 858"
+          :src="`/${link}/five_block_pc.png`"/>
       </div>
       <div
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          width="1262.07"
-          height="980"
-          src='/pc/8 блок послание.png'/>
+          :width="link === 'mobile' ? 352 : 1318"
+          :height="link === 'mobile' ? 605 : 786"
+          :src="`/${link}/six_block_pc.png`"/>
+      </div>
+      <div
+        v-motion-slide-visible-once-right>
+        <SevenBlock
+          :isMobile="isMobile"/>
       </div>
       <div
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          width="1262.07"
-          height="837"
-          src='/pc/9 блок смс.png'/>
+          :width="link === 'mobile' ? 345 : 1262.07"
+          :height="link === 'mobile' ? 681 : 980"
+          :src="`/${link}/8 блок послание.png`"/>
       </div>
-      <div>
+      <div
+        v-motion-slide-visible-once-right>
+        <img
+          :style="{'z-index': '1'}"
+          :width="link === 'mobile' ? 320 : 1262.07"
+          :height="link === 'mobile' ? 793.2 : 837"
+          :src="`/${link}/9 блок смс.png`"/>
+      </div>
+      <div
+        v-if="!isMobile">
         <GuestForm/>
       </div>
-      <div>
+      <div
+        v-if="!isMobile">
         <img
           :style="{'z-index': '1'}"
           width="1262.07"
@@ -95,7 +100,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref, onBeforeMount} from 'vue'
 import FourBlock from './components/FourBlock.vue'
 import GuestForm from './components/GuestForm.vue'
 import SevenBlock from './components/SevenBlock.vue'
@@ -107,6 +112,23 @@ const endVideoFlag = ref(false)
 function onRunVideoClick() {
   video.value.play()
 }
+
+const isMobile = ref(false)
+
+const link = computed(()=> {
+  if (isMobile.value === true) {
+    return 'mobile'
+  } else {
+    return 'pc'
+  }
+})
+
+onBeforeMount(() => {
+  if (screen.width <= 760) {
+    isMobile.value = true
+  }
+  console.log(isMobile)
+})
 </script>
 
 <style scoped lang="scss">
@@ -115,7 +137,7 @@ function onRunVideoClick() {
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  gap: 150px;
+  gap: 50px;
   background-color: $background_color;
 
   &__gradient-first {

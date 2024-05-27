@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="$style['container-pc']">
+    :class="{
+      [$style['container-pc']]: !isMobile,
+      [$style['container-mobile']]: isMobile
+    }">
     <div
       :class="$style['text']">До встречи осталось</div>
     <div
@@ -56,6 +59,7 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
 
+defineProps(['isMobile'])
 onMounted(() => {
   updateDate()
   setInterval(updateDate, 1000)
@@ -80,8 +84,6 @@ function updateDate() {
   hours.value = getNumber(rawHours)
   minutes.value = getNumber(rawMinutes)
   seconds.value = getNumber(rawSeconds)
-
-
 }
 
 function getNumber(number) {
@@ -146,7 +148,7 @@ const descriptionSeconds = computed(() => getNoun(seconds.value, 'секунда
       &:first-child {
         margin-right: 167px
       }
-      
+
       .number {
         font-family: 'Gilroy';
         font-size: 184px;
@@ -161,6 +163,46 @@ const descriptionSeconds = computed(() => getNoun(seconds.value, 'секунда
 }
 
 .container-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $white;
 
+  .text {
+    position: relative;
+    width: 139px;
+    text-align: end;
+    font-family: 'Girloy';
+    font-size: 25px;
+    margin-bottom: 92px;
+
+    &::before {
+      position: absolute;
+      content: url('/mobile/собака (1).png');
+      top: -50px;
+      left: -115px;
+      transform: rotate(-3deg);
+    }
+  }
+
+  .date-container {
+    display: flex;
+
+    .item {
+      &:first-child {
+        margin-right: 49px
+      }
+
+      .number {
+        font-family: 'Gilroy';
+        font-size: 55px;
+      }
+
+      .description {
+        font-family: 'Gilroy';
+        font-size: 14px;
+      }
+    }
+  }
 }
 </style>
