@@ -46,7 +46,7 @@
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          :width="link === 'mobile' ? 365 : 1467"
+          :width="link === 'mobile' ? screenWidth : 1467"
           :height="link === 'mobile' ? 616 : 858"
           :src="`/${link}/five_block_pc.png`"/>
       </div>
