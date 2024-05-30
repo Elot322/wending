@@ -5,7 +5,7 @@
       muted
       playsinline
       autobuffer 
-      preload="auto"
+      preload="metadata"
       class="video" 
       ref="video"
       src="/opening.mp4"
