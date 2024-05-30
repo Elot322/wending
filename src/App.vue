@@ -4,6 +4,8 @@
     <video
       muted
       playsinline
+      autobuffer 
+      preload="auto"
       class="video" 
       ref="video"
       src="/opening.mp4"
