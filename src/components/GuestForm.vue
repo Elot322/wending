@@ -178,10 +178,10 @@ function onButtonClick() {
 
   try {
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" }
+      method: "GET",
+      redirect: "follow",
     };
-    fetch(`https://script.google.com/macros/s/AKfycbxg_TQ_gSQP461NnahUZlrmY37Y0yB6gZOOaG_rX-VJkLUdk1dPPLS_rJL97Ane9NUw/exec?fio=${fio.value}&iam=${iam.value}&iamwith=${iamwith}&alco=${alco.value}`, requestOptions)
+    fetch(`https://script.google.com/macros/s/AKfycbwwrYhqqOuqtSrGSzYJCwCkRWHzojry41Os6saavIjYXzuF46Ell1oUWhCSG6H_ezc_/exec?fio=${fio.value}&iam=${iam.value}&iamwith=${iamwith.value}&alco=${alco.value}`, requestOptions)
       .then(response => {
           buttonText.value = '✓ Форма отправлена'
           disabled.value = true
