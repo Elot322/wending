@@ -9,7 +9,10 @@
     <div>
       <div :class="$style['input-container']">
         <div :class="$style['text']">Ваше Имя и Фамилию</div>
-        <input type="text" id="input">
+        <input 
+          type="text" 
+          id="input"
+          v-model="fio">
       </div>
     </div>
     <div
@@ -18,12 +21,12 @@
         <div :class="$style['text']">Подтвердите присутствие</div>
         <div
           :class="$style['radio']">
-          <input type="radio" id="one" value="One" v-model="picked" />
+          <input type="radio" id="one" value="Обязательно буду" v-model="iam" />
           <div :class="$style['radio-label']">Обязательно буду</div>
         </div>
         <div
           :class="$style['radio']">
-          <input type="radio" id="two" value="Two" v-model="picked" />
+          <input type="radio" id="two" value="Не смогу прийти" v-model="iam" />
           <div :class="$style['radio-label']">Не смогу прийти</div>
         </div>
       </div>
@@ -32,7 +35,10 @@
       :class="$style['margin-top']">
       <div :class="$style['input-container']">
         <div :class="$style['text']">С кем Вы пойдете на праздник?</div>
-        <input type="text" id="input"/>
+        <input 
+          type="text" 
+          id="input"
+          v-model="iamwith"/>
       </div>
     </div>
     <div
@@ -41,52 +47,52 @@
         <div :class="$style['text']">Уточните Ваши предпочтения в алкоголе:</div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="vineRed"/>
           <div :class="$style['checkbox-label']">Вино красное</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="vineWhite"/>
           <div :class="$style['checkbox-label']">Вино белое</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="shampain"/>
           <div :class="$style['checkbox-label']">Шампанское</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="vodka"/>
           <div :class="$style['checkbox-label']">Водка</div>
         </div>
                 <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="viski"/>
           <div :class="$style['checkbox-label']">Виски</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="konyak"/>
           <div :class="$style['checkbox-label']">Коньяк</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="gin"/>
           <div :class="$style['checkbox-label']">Джин</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="iDontKnow"/>
           <div :class="$style['checkbox-label']">Без разницы</div>
         </div>
           <div
             :class="$style['checkbox']">
-            <input type="checkbox" id="input"/>
+            <input type="checkbox" id="input" v-model="iDontDrink"/>
           <div :class="$style['checkbox-label']">Я не пью</div>
         </div>
         <div
           :class="$style['checkbox']">
-          <input type="checkbox" id="input"/>
+          <input type="checkbox" id="input" v-model="say"/>
           <div :class="$style['checkbox-label']">Напишу лично(другие предпочтения)</div>
         </div>
         <button
@@ -99,17 +105,90 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 defineProps(['isMobile'])
 
-const picked = ref()
 const buttonText = ref('Отправить')
 const disabled = ref(false)
 
+const fio = ref('')
+const iam = ref()
+const iamwith = ref('')
+
+const vineRed = ref(false)
+const vineWhite = ref(false)
+const shampain = ref(false)
+const vodka = ref(false)
+const viski = ref(false)
+const konyak = ref(false)
+const gin = ref(false)
+const iDontKnow = ref(false)
+const iDontDrink = ref(false)
+const say = ref(false)
+
+
+const alco = computed(() => {
+  const result = []
+
+  if (vineRed.value) {
+    result.push('Вино красное')
+  }
+
+  if (vineWhite.value) {
+    result.push('Вино белое')
+  }
+
+  if (shampain.value) {
+    result.push('Шампанское')
+  }
+
+  if (vodka.value) {
+    result.push('Водка')
+  }
+
+  if (viski.value) {
+    result.push('Виски')
+  }
+  
+  if (konyak.value) {
+    result.push('Виски')
+  }
+
+  if (gin.value) {
+    result.push('Джин')
+  }
+
+  if ( iDontKnow.value ) {
+    result.push('Без разницы')
+  }
+
+  if ( iDontDrink.value ) {
+    result.push('Я не пью')
+  }
+
+  if ( say.value ) {
+    return ('Напишу лично')
+  }
+
+  return result
+})
+
 function onButtonClick() {
-  buttonText.value = '✓ Форма отправлена'
-  disabled.value = true
+
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    };
+    fetch(`https://script.google.com/macros/s/AKfycbxg_TQ_gSQP461NnahUZlrmY37Y0yB6gZOOaG_rX-VJkLUdk1dPPLS_rJL97Ane9NUw/exec?fio=${fio.value}&iam=${iam.value}&iamwith=${iamwith}&alco=${alco.value}`, requestOptions)
+      .then(response => {
+          buttonText.value = '✓ Форма отправлена'
+          disabled.value = true
+      })
+  } catch {
+
+  }
 }
 
 </script>
