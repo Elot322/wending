@@ -8,7 +8,7 @@
       preload="metadata"
       class="video" 
       ref="video"
-      src="/opening.mp4"
+      src="/opening.mp4#t=0.1"
       @ended="onEnded"
       @click="onRunVideoClick">
     </video>
