@@ -1,8 +1,17 @@
 <template>
   <div
+    v-if="!endVideoFlag && isMobile">
+    <video
+      class="video" 
+      ref="video"
+      src="/opening.mp4"
+      @ended="onEnded"
+      @click="onRunVideoClick">
+    </video>
+  </div>
+  <div
+    v-if="endVideoFlag || !isMobile"
     class="page-container">
-      <!-- <div class="page-container__gradient-first"></div>
-      <div class="page-container__gradient-two"></div> -->
       <div 
         v-motion-slide-visible-once-right>
         <img
@@ -62,13 +71,13 @@
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          :width="link === 'mobile' ? 320 : 1262.07"
+          :width="link === 'mobile' ? screenWidth : 1262.07"
           :height="link === 'mobile' ? 793.2 : 837"
           :src="`/${link}/9 блок смс.png`"/>
       </div>
-      <div
-        v-if="!isMobile">
-        <GuestForm/>
+      <div>
+        <GuestForm
+          :isMobile="isMobile"/>
       </div>
       <div
         v-if="!isMobile">
@@ -78,24 +87,6 @@
           height="837"
           src='/pc/11 блок конец.png'/>
       </div>
-      <!-- <video
-        v-if="!endVideoFlag"
-        ref="video"
-        src="/opening.mp4"
-        @ended="endVideoFlag = true"
-        @click="onRunVideoClick">
-      </video> -->
-      <!-- <div
-        v-if="endVideoFlag">
-        <div 
-          v-motion-slide-visible-once-right>
-          <HelloBlock/>
-        </div>
-        <div
-          v-motion-slide-visible-once-right>
-          <WelcomeBlock/>
-        </div>
-      </div> -->
   </div>
 </template>
 
@@ -113,6 +104,16 @@ function onRunVideoClick() {
   video.value.play()
 }
 
+const screenWidth = ref(screen.width)
+
+function onEnded() {
+  var video = document.querySelector('.video');
+  video.classList.add('anim-fade-out');
+  setTimeout(() => {
+    endVideoFlag.value = true
+  }, 100)
+}
+
 const isMobile = ref(false)
 
 const link = computed(()=> {
@@ -127,11 +128,26 @@ onBeforeMount(() => {
   if (screen.width <= 760) {
     isMobile.value = true
   }
-  console.log(isMobile)
 })
 </script>
 
 <style scoped lang="scss">
+
+video {
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+}
+
+.anim-fade-out {
+  animation: fade-out 1s forwards;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
 .page-container {
   display: flex;
   flex-direction: column;
@@ -139,6 +155,7 @@ onBeforeMount(() => {
   flex-wrap: wrap;
   gap: 50px;
   background-color: $background_color;
+  overflow-x: hidden;
 
   &__gradient-first {
     position: fixed;
@@ -172,12 +189,6 @@ onBeforeMount(() => {
       left: 55px;
       top: 438px;
     }
-  }
-
-  video {
-    z-index: 200;
-    width: 100%;
-    height: 100%;
   }
 }
 </style>
