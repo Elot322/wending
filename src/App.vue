@@ -2,6 +2,8 @@
   <div
     v-if="!endVideoFlag && isMobile">
     <video
+      muted
+      playsinline
       class="video" 
       ref="video"
       src="/opening.mp4"

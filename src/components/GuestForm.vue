@@ -201,6 +201,7 @@ function onButtonClick() {
     border: none;
     color: white;
     border-bottom: 2px solid white; /* Цвет и толщина полоски */
+    border-radius: 0;
     outline: none; /* Убираем обводку при фокусе */
     background: transparent; /* Прозрачный фон */
     width: 100%;
@@ -218,6 +219,8 @@ function onButtonClick() {
     accent-color: #232323;
   }
   .input-container {
+    padding-left: 5px;
+    padding-right: 5px;
     .text {
       text-align: start;
       font-family: 'Gilroy';
@@ -252,6 +255,7 @@ function onButtonClick() {
       border: none;
       background-color: $white;
       font-size: 30px;
+      color: black;
       border-radius: 24px;
       cursor: pointer;
     }
