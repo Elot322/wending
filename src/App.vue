@@ -15,18 +15,24 @@
   </div>
   <div
     v-if="endVideoFlag || !isMobile"
-    class="page-container">
+    :class="$style['page-container']">
+      <div :class="$style['page-container__gradient-first']"></div>
+      <div :class="$style['page-container__gradient-two']"></div>
       <div 
         v-motion-slide-visible-once-right>
         <img
-          :style="{'z-index': '1'}"
+          :style="{'z-index': '1', 'margin-top': isMobile ? '80px': '0px'}"
           :width="link === 'mobile' ? 365 : 1171"
           :height="link === 'mobile' ? 542.55 : 916"
           :src='`/${link}/first_block_pc.png`'/>
       </div>
       <div 
         v-motion-slide-visible-once-right>
+        <TwoBlock
+          :style="{'z-index': '1'}"
+          v-if="isMobile"/>
         <img
+          v-else
           :style="{'z-index': '1'}"
           :width="link === 'mobile' ? 365 : 1171"
           :height="link === 'mobile' ? 578.55 : 916"
@@ -44,7 +50,10 @@
       </div>
       <div
         v-motion-slide-visible-once-right>
+        <FiveBlock
+          v-if="isMobile"/>
         <img
+          v-else
           :style="{'z-index': '1'}"
           :width="link === 'mobile' ? screenWidth : 1467"
           :height="link === 'mobile' ? 616 : 858"
@@ -52,7 +61,10 @@
       </div>
       <div
         v-motion-slide-visible-once-right>
+        <SixBlock
+          v-if="isMobile"/>
         <img
+          v-else
           :style="{'z-index': '1'}"
           :width="link === 'mobile' ? 352 : 1318"
           :height="link === 'mobile' ? 605 : 786"
@@ -79,12 +91,14 @@
           :height="link === 'mobile' ? 793.2 : 837"
           :src="`/${link}/9 блок смс.png`"/>
       </div>
-      <div>
+      <div
+        :style="{'z-index': '1'}">
         <GuestForm
           :isMobile="isMobile"/>
       </div>
       <div
-        v-if="!isMobile">
+        v-if="!isMobile"
+        :style="{'z-index': '1'}">
         <img
           :style="{'z-index': '1'}"
           width="1262.07"
@@ -99,7 +113,10 @@ import { computed, onMounted, ref, onBeforeMount} from 'vue'
 import FourBlock from './components/FourBlock.vue'
 import GuestForm from './components/GuestForm.vue'
 import SevenBlock from './components/SevenBlock.vue'
+import FiveBlock from './components/mobile/FiveBlock.vue'
 import ThreeBlock from './components/ThreeBlock.vue'
+import TwoBlock from './components/mobile/TwoBlock.vue'
+import SixBlock from './components/mobile/SixBlock.vue'
 
 const video = ref()
 const endVideoFlag = ref(false)
@@ -135,7 +152,7 @@ onBeforeMount(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style module lang="scss">
 
 video {
   z-index: 200;
@@ -158,23 +175,32 @@ video {
   align-items: center;
   flex-wrap: wrap;
   gap: 50px;
+  position: relative;
   background-color: $background_color;
   overflow-x: hidden;
+
+  // &::before {
+  //   position: absolute;
+  //   width: 500px;
+  //   height: 500px;
+  //   left: 1250px;
+  //   top: 1000px;
+  //   background: radial-gradient(50% 50% at 50% 50%, rgba(242, 9, 16, 0.79) 0%, rgba(242, 9, 16, 0) 100%);
+  //   filter: blur(56.75px);
+  // }
 
   &__gradient-first {
     position: fixed;
     width: 1157px;
     height: 1025px;
-    left: 341px;
-    top: -433px;
-    z-index: 0;
-
+    left: -500px;
+    top: -500px;
     background: radial-gradient(50% 50% at 50% 50%, rgba(242, 9, 16, 0.79) 0%, rgba(242, 9, 16, 0) 100%);
     filter: blur(56.75px);
 
-    @media screen and (max-width: 480px) {
-      left: 55px;
-      top: 438px;
+     @media screen and (max-width: 480px) {
+      left: -700px;
+      top: -700px;
     }
   }
 
@@ -182,17 +208,29 @@ video {
     position: fixed;
     width: 1157px;
     height: 1025px;
-    left: 1000px;
-    top: 500px;
-    z-index: 0;
-
+    left: 600px;
+    top: 300px;
     background: radial-gradient(50% 50% at 50% 50%, rgba(242, 9, 16, 0.79) 0%, rgba(242, 9, 16, 0) 100%);
     filter: blur(56.75px);
 
     @media screen and (max-width: 480px) {
-      left: 55px;
-      top: 438px;
+      left: 50px;
+      top: 150px;
     }
   }
+
+  // &__gradient-two {
+  //   position: fixed;
+  //   width: 1157px;
+  //   height: 1025px;
+
+  //   background: radial-gradient(50% 50% at 50% 50%, rgba(242, 9, 16, 0.79) 0%, rgba(242, 9, 16, 0) 100%);
+  //   filter: blur(56.75px);
+
+  //   @media screen and (max-width: 480px) {
+  //     left: -250px;
+  //     top: -300px;
+  //   }
+  // }
 }
 </style>
