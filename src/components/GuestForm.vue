@@ -8,7 +8,7 @@
       :class="$style['title']">АНКЕТА ГОСТЯ</div>
     <div>
       <div :class="$style['input-container']">
-        <div :class="$style['text']">Ваше Имя и Фамилию</div>
+        <div :class="$style['text']">Ваше Имя и Фамилия</div>
         <input 
           type="text" 
           id="input"
@@ -18,7 +18,7 @@
     <div
       :class="$style['margin-top']">
       <div :class="$style['input-container']">
-        <div :class="$style['text']">Подтвердите присутствие</div>
+        <div :class="$style['text']">Подтвердите присутствие до 1 августа</div>
         <div
           :class="$style['radio']">
           <input type="radio" id="one" value="Обязательно буду" v-model="iam" />
@@ -65,7 +65,7 @@
           <input type="checkbox" id="input" v-model="vodka"/>
           <div :class="$style['checkbox-label']">Водка</div>
         </div>
-                <div
+        <div
           :class="$style['checkbox']">
           <input type="checkbox" id="input" v-model="viski"/>
           <div :class="$style['checkbox-label']">Виски</div>
@@ -284,7 +284,9 @@ function onButtonClick() {
     border-radius: 0;
     outline: none; /* Убираем обводку при фокусе */
     background: transparent; /* Прозрачный фон */
-    width: 100%;
+    //width: 100%;
+    max-width: calc(100% - 16px);
+    min-width: calc(100% - 16px);
     font-family: 'Gilroy';
     font-size: 17px
   }

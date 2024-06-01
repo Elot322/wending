@@ -82,7 +82,7 @@ const timing = ref([
     }
 
     .description {
-      text-align: right;
+      text-align: left;
       font-size: 20px;
       max-width: 140px;
       min-width: 140px;

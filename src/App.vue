@@ -1,5 +1,6 @@
 <template>
   <div
+    :class="$style['video-container']"
     v-if="!endVideoFlag && isMobile">
     <video
       muted
@@ -9,9 +10,20 @@
       class="video" 
       ref="video"
       src="/opening.mp4#t=0.1"
-      @ended="onEnded"
-      @click="onRunVideoClick">
+      @ended="onEnded">
     </video>
+    <div 
+      v-if="showAnim"
+      :class="$style['tap-me']"
+      @click="onRunVideoClick">
+      <img
+        src='/mobile/tap-tap.gif'
+      />
+      <div
+        :class="$style['text']">
+        Жмяк сюда
+      </div>
+    </div>
   </div>
   <div
     v-if="endVideoFlag || !isMobile"
@@ -76,10 +88,11 @@
           :isMobile="isMobile"/>
       </div>
       <div
+        :style="{'z-index': '1'}"
         v-motion-slide-visible-once-right>
         <img
           :style="{'z-index': '1'}"
-          :width="link === 'mobile' ? 345 : 1262.07"
+          :width="link === 'mobile' ? screenWidth-10 : 1262.07"
           :height="link === 'mobile' ? 681 : 980"
           :src="`/${link}/8 блок послание.png`"/>
       </div>
@@ -97,13 +110,12 @@
           :isMobile="isMobile"/>
       </div>
       <div
-        v-if="!isMobile"
         :style="{'z-index': '1'}">
         <img
           :style="{'z-index': '1'}"
-          width="1262.07"
-          height="837"
-          src='/pc/11 блок конец.png'/>
+          :width="link === 'mobile' ? screenWidth : 1262.07"
+          :height="link === 'mobile' ? 319 : 837"
+          :src="`/${link}/11 блок конец.png`"/>
       </div>
   </div>
 </template>
@@ -120,8 +132,10 @@ import SixBlock from './components/mobile/SixBlock.vue'
 
 const video = ref()
 const endVideoFlag = ref(false)
+const showAnim = ref(true)
 
 function onRunVideoClick() {
+  showAnim.value = false
   video.value.play()
 }
 
@@ -154,10 +168,25 @@ onBeforeMount(() => {
 
 <style module lang="scss">
 
-video {
-  z-index: 200;
-  width: 100%;
-  height: 100%;
+.video-container {
+  position: relative;
+  video {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tap-me {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+  }
+
+  .text {
+    font-family: 'dance';
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+  }
 }
 
 .anim-fade-out {

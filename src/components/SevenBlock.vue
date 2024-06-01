@@ -8,6 +8,7 @@
       :class="$style['title']">
       ДРЕСС-КОД
     </div>
+
     <div>
       <img
         :src="`/${link}/seven_block_lady_pc.png`"/>
@@ -20,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 const props = defineProps(['isMobile'])
 
 const link = computed(()=> {
@@ -30,6 +31,26 @@ const link = computed(()=> {
     return 'pc'
   }
 })
+
+// carousel settings
+    const settings = ref({
+      itemsToShow: 1,
+      snapAlign: 'center',
+    })
+    // breakpoints are mobile first
+    // any settings not specified will fallback to the carousel settings
+    const breakpoints = {
+      // 700px and up
+      700: {
+        itemsToShow: 3.5,
+        snapAlign: 'center',
+      },
+      // 1024 and up
+      1024: {
+        itemsToShow: 5,
+        snapAlign: 'start',
+      },
+    }
 </script>
 
 <style lang="scss" module>
