@@ -9,7 +9,7 @@
       preload="metadata"
       class="video" 
       ref="video"
-      src="/opening.mp4#t=0.1"
+      src="/opening.mp4#t=0.79"
       @ended="onEnded">
     </video>
     <div 
@@ -90,7 +90,10 @@
       <div
         :style="{'z-index': '1'}"
         v-motion-slide-visible-once-right>
+        <AthBlock
+          v-if="isMobile"/>
         <img
+          v-else
           :style="{'z-index': '1'}"
           :width="link === 'mobile' ? screenWidth-10 : 1262.07"
           :height="link === 'mobile' ? 681 : 980"
@@ -129,6 +132,7 @@ import FiveBlock from './components/mobile/FiveBlock.vue'
 import ThreeBlock from './components/ThreeBlock.vue'
 import TwoBlock from './components/mobile/TwoBlock.vue'
 import SixBlock from './components/mobile/SixBlock.vue'
+import AthBlock from './components/mobile/AthBlock.vue'
 
 const video = ref()
 const endVideoFlag = ref(false)

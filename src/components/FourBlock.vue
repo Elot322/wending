@@ -128,7 +128,7 @@ const descriptionSeconds = computed(() => getNoun(seconds.value, 'секунда
 
   .text {
     position: relative;
-    font-family: 'Girloy';
+    font-family: 'Gilroy';
     font-size: 60px;
     margin-bottom: 92px;
 
@@ -172,7 +172,7 @@ const descriptionSeconds = computed(() => getNoun(seconds.value, 'секунда
     position: relative;
     width: 139px;
     text-align: end;
-    font-family: 'Girloy';
+    font-family: 'Gilroy';
     font-size: 25px;
     margin-bottom: 92px;
 

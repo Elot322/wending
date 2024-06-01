@@ -8,14 +8,41 @@
       :class="$style['title']">
       ДРЕСС-КОД
     </div>
-
     <div>
       <img
         :src="`/${link}/seven_block_lady_pc.png`"/>
+      <div
+        :class="$style['carusel']">
+        <img
+          v-for="i in 7"
+          :key="i"
+          width="172"
+          height="259"
+          :src="`/ladys/${i+1}.png`"/>
+      </div>
+    </div>
+    <div
+      :class="$style['next']">
+      <img
+        src="/mobile/стрелочка.png"/>
     </div>
     <div>
       <img
         :src="`/${link}/seven_block_boys_pc.png`"/>
+    </div>
+    <div
+      :class="$style['carusel']">
+      <img
+        v-for="i in 4"
+        :key="i"
+        width="172"
+        height="259"
+        :src="`/boys/${i+1}.png`"/>
+    </div>
+    <div
+      :class="$style['next']">
+      <img
+        src="/mobile/стрелочка.png"/>
     </div>
   </div>
 </template>
@@ -113,6 +140,18 @@ const link = computed(()=> {
   flex-direction: column;
   align-items: center;
   color: $white;
+
+  .carusel {
+    display: flex;
+    overflow-x: auto; 
+    width: 330px
+  }
+
+  .next {
+    display: flex;
+    width: 330px;
+    justify-content: end;
+  }
 
   .title {
     font-family: 'dance';

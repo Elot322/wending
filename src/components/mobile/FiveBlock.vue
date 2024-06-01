@@ -32,22 +32,22 @@ import { ref } from "vue"
 
 const timing = ref([
   {
-    image: '/mobile/бокалы.png',
+    image: '/mobile/бокалы.svg',
     time: '15:30',
     description: 'Сбор гостей и фуршет',
   },
   {
-    image: '/mobile/церемония.png',
+    image: '/mobile/церемония.svg',
     time: '16:00',
     description: 'Церемония',
   },
   {
-    image: '/mobile/фуршет.png',
+    image: '/mobile/фуршет.svg',
     time: '17:00',
     description: 'Торжественный ужин',
   },
   {
-    image: '/mobile/салют.png',
+    image: '/mobile/салют.svg',
     time: '23:00',
     description: 'Завершение вечера',
   },
@@ -58,9 +58,18 @@ const timing = ref([
 .container {
   color: white;
   .header {
+    margin-top: 70px;
+    position: relative;
     text-align: center;
     font-family: 'dance';
     font-size: 50px;
+
+    &::before {
+      position: absolute;
+      content: url('/mobile/газета.png');
+      top: -120px;
+      left: -25px;
+    }
   }
   .timing {
     display: flex;
@@ -70,7 +79,7 @@ const timing = ref([
     display: flex;
     align-items: center;
     font-family: 'Gilroy';
-    gap: 10px;
+    gap: 30px;
 
     .image {
       width: 86.86px;
