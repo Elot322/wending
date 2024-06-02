@@ -14,11 +14,11 @@
       <div
         :class="$style['carusel']">
         <img
-          v-for="i in 7"
+          v-for="i in 8"
           :key="i"
           width="172"
           height="259"
-          :src="`/ladys/${i+1}.png`"/>
+          :src="`/ladys/${i}.png`"/>
       </div>
     </div>
     <div
@@ -33,11 +33,11 @@
     <div
       :class="$style['carusel']">
       <img
-        v-for="i in 4"
+        v-for="i in 6"
         :key="i"
         width="172"
         height="259"
-        :src="`/boys/${i+1}.png`"/>
+        :src="`/boys/${i}.png`"/>
     </div>
     <div
       :class="$style['next']">

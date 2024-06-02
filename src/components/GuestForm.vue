@@ -93,7 +93,7 @@
         <div
           :class="$style['checkbox']">
           <input type="checkbox" id="input" v-model="say"/>
-          <div :class="$style['checkbox-label']">Напишу лично(другие предпочтения)</div>
+          <div :class="$style['checkbox-label']">Напишу лично (другие предпочтения)</div>
         </div>
         <button
           :class="$style['button']"

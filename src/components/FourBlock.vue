@@ -179,7 +179,7 @@ const descriptionSeconds = computed(() => getNoun(seconds.value, 'секунда
     &::before {
       position: absolute;
       content: url('/mobile/собака (1).png');
-      top: -50px;
+      top: -53px;
       left: -115px;
       transform: rotate(-3deg);
     }
